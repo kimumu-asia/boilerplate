@@ -8,10 +8,10 @@ const { User } = require("./models/User")
 const config = require('./config/key')
 
 //application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({extended: true}))
+app.use(express.urlencoded({extended: true}))
 
 // application/json
-app.use(bodyParser.json())
+app.use(express.json())
 
 const mongoose = require('mongoose')
 mongoose.connect(config.mongoURI, {
@@ -28,6 +28,7 @@ app.get('/', (req, res) => {
 
 
 app.post('/register', (req, res) => {
+    console.log('``` [POST] /register, request body: ', req.body)
     // get information for signup, and save to database
     const user = new User(req.body)
     user.save((err, userInfo) => {
